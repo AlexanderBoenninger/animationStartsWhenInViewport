@@ -1,0 +1,42 @@
+
+.placeholder_1{
+  background-color: red;
+
+}
+.placeholder_2{
+  background-color: green;
+
+}
+.pl_hold{
+  height: 100vh;
+}
+h1{
+  font-size: 3em;
+  text-align: center;
+  font-family: sans-serif;
+  line-height: 90vh;
+}
+.thing{
+  width: 100%;
+  height: auto;
+  background-color: #f1f1f1;
+}
+
+.banner{
+
+}
+.black{
+    background-color: #000;
+}
+.AniContainer{
+  padding: 5em 0em;
+}
+
+span{
+  visibility: hidden;
+  transition: opacity 0.5s;
+}
+
+span.blick{
+  visibility: visible;
+}
