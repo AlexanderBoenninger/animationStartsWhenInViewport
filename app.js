@@ -5,6 +5,18 @@ const strText = text.textContent;
 const splitText = strText.split("");
   text.textContent = "";
 
+
+  $(window).scroll(function() {
+        function elementScrolled(elem)
+        {
+          var docViewTop = $(window).scrollTop();
+          var docViewBottom = docViewTop + $(window).height()/1.5;
+          var elemTop = $(elem).offset().top;
+          var thisH = $(elem).outerHeight() + elemTop /1.5;
+          return ((elemTop <= docViewBottom) && (thisH >= docViewTop));
+        }
+
+if(elementScrolled('.banner')) {
 for (let i = 0; i < splitText.length; i++){
   text.innerHTML += "<span>" + splitText[i] + "</span>";
 }
@@ -31,3 +43,6 @@ function complete(){
   back.classList.remove('black');
 
 }
+ }
+  else {}
+  });
