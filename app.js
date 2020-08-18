@@ -41,6 +41,7 @@ function complete(){
   clearInterval(timer);
   timer = null;
   back.classList.remove('black');
+  back.classList.remove('banner');
 
 }
  }
