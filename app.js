@@ -3,47 +3,47 @@ const text = document.querySelector('.fancy');
 const back = document.querySelector('.banner');
 const strText = text.textContent;
 const splitText = strText.split("");
-  text.textContent = "";
+text.textContent = "";
 
-
-  $(window).scroll(function() {
-        function elementScrolled(elem)
-        {
-          var docViewTop = $(window).scrollTop();
-          var docViewBottom = docViewTop + $(window).height()/1.5;
-          var elemTop = $(elem).offset().top;
-          var thisH = $(elem).outerHeight() + elemTop /1.5;
-          return ((elemTop <= docViewBottom) && (thisH >= docViewTop));
-        }
-
-if(elementScrolled('.banner')) {
-for (let i = 0; i < splitText.length; i++){
-  text.innerHTML += "<span>" + splitText[i] + "</span>";
+function elementScrolled(elem) {
+  var docViewTop = $(window).scrollTop();
+  var docViewBottom = docViewTop + $(window).height()/1.5;
+  var elemTop = $(elem).offset().top;
+  var thisH = $(elem).outerHeight() + elemTop /1.5;
+  return ((elemTop <= docViewBottom) && (thisH >= docViewTop));
 }
 
-let char = 0;
-let timer = setInterval(onTick, 100);
+function onScroll() {
+  if(elementScrolled('.banner')) {
+    for (let i = 0; i < splitText.length; i++){
+      text.innerHTML += "<span>" + splitText[i] + "</span>";
+    }
 
+    let char = 0;
+    let timer = setInterval(onTick, 100);
 
-function onTick(){
-const span = text.querySelectorAll('span')[char];
-span.classList.add('blick');
-back.classList.toggle('black');
-char++
+    function onTick(){
+      const span = text.querySelectorAll('span')[char];
+      span.classList.add('blick');
+      back.classList.toggle('black');
+      char++
 
-if (char === splitText.length){
-  complete();
-  return;
-}
-}
+      if (char === splitText.length){
+        complete();
+        return;
+      }
+    }
 
-function complete(){
-  clearInterval(timer);
-  timer = null;
-  back.classList.remove('black');
-  back.classList.remove('banner');
-
-}
+    function complete(){
+      clearInterval(timer);
+      timer = null;
+      back.classList.remove('black');
+      back.classList.remove('banner');
+      window.removeEventListener('scroll', onScroll);
+    }
  }
-  else {}
-  });
+}
+
+
+
+window.addEventListener('scroll', onScroll)
