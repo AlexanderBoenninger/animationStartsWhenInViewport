@@ -1,32 +1,43 @@
 
-const text = document.querySelector('.fancy');
-const back = document.querySelector('.banner');
-const strText = text.textContent;
-const splitText = strText.split("");
-text.textContent = "";
+const scroller = scrollama();
 
-function initialize() {
-  //we set the scroll handler here
-  window.addEventListener('scroll', onScroll)
-}
+// setup the instance, pass callback functions
+scroller
+  .setup({
+    step: ".banner"
+  })
+  .onStepEnter(response => {
+    // { element, index, direction }
+    console.log('onStepEnter', response);
+    runAnimation(response.element)
+  })
+  .onStepExit(response => {
+    // { element, index, direction }
+    console.log('onStepExit', response);
+  });
 
-function onScroll() {
-  //run this function on every scroll event
-  if(elementScrolled('.banner')) {
-    //if the elment is in the viewport, remove the scroll listener, and run runAnimation()
-    //this way we guarantee the runAnimation function is executed only once
-    window.removeEventListener('scroll', onScroll);
-    runAnimation();
-  }
-}
+// setup resize event
+window.addEventListener("resize", scroller.resize);
 
-function runAnimation() {
+function runAnimation(elem) {
+  const back = elem;
+  const text = elem.querySelector('.fancy');
+  const strText = text.textContent;
+  const splitText = strText.split("");
+  text.textContent = "";
   for (let i = 0; i < splitText.length; i++){
     text.innerHTML += "<span>" + splitText[i] + "</span>";
   }
 
   let char = 0;
   let timer = setInterval(onTick, 100);
+
+  function complete() {
+    clearInterval(timer);
+    timer = null;
+    back.classList.remove('black');
+    // setTimeout(runAnimation, 5000);
+  }
 
   function onTick(){
     const span = text.querySelectorAll('span')[char];
@@ -39,22 +50,5 @@ function runAnimation() {
       return;
     }
   }
-
-  function complete() {
-    clearInterval(timer);
-    timer = null;
-    back.classList.remove('black');
-
-  }
+  
 }
-
-function elementScrolled(elem) {
-  //helper function to see if element is in viewport
-  var docViewTop = $(window).scrollTop();
-  var docViewBottom = docViewTop + $(window).height()/1.5;
-  var elemTop = $(elem).offset().top;
-  var thisH = $(elem).outerHeight() + elemTop /1.5;
-  return ((elemTop <= docViewBottom) && (thisH >= docViewTop));
-}
-
-initialize();
