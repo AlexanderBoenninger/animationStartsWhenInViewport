@@ -44,7 +44,7 @@ function runAnimation() {
     clearInterval(timer);
     timer = null;
     back.classList.remove('black');
-
+    setTimeout(runAnimation, 5000);
   }
 }
 
