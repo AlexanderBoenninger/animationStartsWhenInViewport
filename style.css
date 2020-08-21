@@ -18,7 +18,7 @@ h1{
 }
 .thing{
   width: 100%;
-  height: auto;
+  height: 100vh;
   background-color: #f1f1f1;
 }
 
