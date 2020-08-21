@@ -4,12 +4,13 @@ const scroller = scrollama();
 // setup the instance, pass callback functions
 scroller
   .setup({
-    step: ".banner"
+    step: ".banner , .banner2",
   })
   .onStepEnter(response => {
     // { element, index, direction }
     console.log('onStepEnter', response);
-    runAnimation(response.element)
+    runAnimation(response.element);
+    runsecAnimation(response.element);
   })
   .onStepExit(response => {
     // { element, index, direction }
@@ -50,5 +51,38 @@ function runAnimation(elem) {
       return;
     }
   }
-  
+
+}
+
+function runsecAnimation(elem) {
+  const back = elem;
+  const text = elem.querySelector('.zitat');
+  const strText = text.textContent;
+  const splitText = strText.split("");
+  text.textContent = "";
+  for (let i = 0; i < splitText.length; i++){
+    text.innerHTML += "<span>" + splitText[i] + "</span>";
+  }
+
+  let char = 0;
+  let timer = setInterval(onTick, 50);
+
+  function complete() {
+    clearInterval(timer);
+    timer = null;
+    back.classList.remove('black');
+    // setTimeout(runAnimation, 5000);
+  }
+
+  function onTick(){
+    const span = text.querySelectorAll('span')[char];
+    span.classList.add('blick');
+    char++
+
+    if (char === splitText.length){
+      complete();
+      return;
+    }
+  }
+
 }
