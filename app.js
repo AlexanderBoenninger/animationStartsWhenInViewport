@@ -3,19 +3,20 @@ const scroller = scrollama();
 
 // setup the instance, pass callback functions
 scroller
-  .setup({
-    step: ".banner , .banner2",
-  })
-  .onStepEnter(response => {
-    // { element, index, direction }
-    console.log('onStepEnter', response);
-    runAnimation(response.element);
-    runsecAnimation(response.element);
-  })
-  .onStepExit(response => {
-    // { element, index, direction }
-    console.log('onStepExit', response);
-  });
+.setup({
+  step: ".banner",
+})
+.onStepEnter(response => {
+  // { element, index, direction }
+  console.log('onStepEnter', response);
+  if(response.index === 0) runAnimation(response.element);
+  if(response.index === 1) runsecAnimation(response.element);
+})
+.onStepExit(response => {
+  // { element, index, direction }
+  console.log('onStepExit', response);
+});
+
 
 // setup resize event
 window.addEventListener("resize", scroller.resize);
