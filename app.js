@@ -1,6 +1,7 @@
 
 const scroller = scrollama();
 let animationOn = false;
+let secondAnimationRun = false;
 
 // setup the instance, pass callback functions
 scroller
@@ -14,7 +15,7 @@ scroller
     animationOn = true;
     runAnimation(response.element);
   }
-  if(response.index === 1) runsecAnimation(response.element);
+  if(response.index === 1 && !secondAnimationRun) runsecAnimation(response.element);
 })
 .onStepExit(response => {
   // { element, index, direction }
@@ -66,6 +67,7 @@ function runAnimation(elem) {
 }
 
 function runsecAnimation(elem) {
+  secondAnimationRun = true;
   const back = elem;
   const text = elem.querySelector('.zitat');
   const strText = text.textContent;
