@@ -16,6 +16,7 @@ scroller
     runAnimation(response.element);
   }
   if(response.index === 1 && !secondAnimationRun) runsecAnimation(response.element);
+  if(response.index === 2 && !secondAnimationRun) runsecAnimation(response.element);
 })
 .onStepExit(response => {
   // { element, index, direction }
