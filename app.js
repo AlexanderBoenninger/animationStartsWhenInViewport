@@ -1,5 +1,6 @@
 
 const scroller = scrollama();
+let animationOn = false;
 
 // setup the instance, pass callback functions
 scroller
@@ -9,12 +10,16 @@ scroller
 .onStepEnter(response => {
   // { element, index, direction }
   console.log('onStepEnter', response);
-  if(response.index === 0) runAnimation(response.element);
+  if(response.index === 0) {
+    animationOn = true;
+    runAnimation(response.element);
+  }
   if(response.index === 1) runsecAnimation(response.element);
 })
 .onStepExit(response => {
   // { element, index, direction }
   console.log('onStepExit', response);
+  if(response.index === 0) animationOn = false;
 });
 
 
@@ -22,6 +27,7 @@ scroller
 window.addEventListener("resize", scroller.resize);
 
 function runAnimation(elem) {
+  
   const back = elem;
   const text = elem.querySelector('.fancy');
   const strText = text.textContent;
@@ -38,7 +44,11 @@ function runAnimation(elem) {
     clearInterval(timer);
     timer = null;
     back.classList.remove('black');
-    // setTimeout(runAnimation, 5000);
+    if(animationOn){
+      setTimeout(() => {
+        runAnimation(back);
+      }, 500);
+    }
   }
 
   function onTick(){
