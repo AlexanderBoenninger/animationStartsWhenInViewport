@@ -1,33 +1,35 @@
 
 const scroller = scrollama();
-let animationOn = false;
-let secondAnimationRun = false;
+let animationsRun = {};
 
 // setup the instance, pass callback functions
 scroller
 .setup({
-  step: ".banner",
+  step: ".banner_blink, .banner_typewriter",
 })
 .onStepEnter(response => {
   // { element, index, direction }
-  console.log('onStepEnter', response);
-  if(response.index === 0) {
-    animationOn = true;
-    runAnimation(response.element);
+  // console.log('onStepEnter', animationsRun);
+  if($(response.element).hasClass('banner_blink')){
+    animationsRun[response.index] = true;
+    runAnimationBlink(response.element, response.index);
   }
-  if(response.index === 1 && !secondAnimationRun) runsecAnimation(response.element);
+  if($(response.element).hasClass('banner_typewriter') && !animationsRun[response.index]){
+    runAnimationTypewriter(response.element, response.index);
+  }
 })
 .onStepExit(response => {
   // { element, index, direction }
-  console.log('onStepExit', response);
-  if(response.index === 0) animationOn = false;
+  // console.log('onStepExit', response);
+  if($(response.element).hasClass('banner_blink')){
+    animationsRun[response.index] = false;
+  }
 });
-
 
 // setup resize event
 window.addEventListener("resize", scroller.resize);
 
-function runAnimation(elem) {
+function runAnimationBlink(elem, index) {
   
   const back = elem;
   const text = elem.querySelector('.fancy');
@@ -45,9 +47,9 @@ function runAnimation(elem) {
     clearInterval(timer);
     timer = null;
     back.classList.remove('black');
-    if(animationOn){
+    if(animationsRun[index]){
       setTimeout(() => {
-        runAnimation(back);
+        runAnimationBlink(back, index);
       }, 500);
     }
   }
@@ -66,8 +68,8 @@ function runAnimation(elem) {
 
 }
 
-function runsecAnimation(elem) {
-  secondAnimationRun = true;
+function runAnimationTypewriter(elem, index) {
+  animationsRun[index] = true;
   const back = elem;
   const text = elem.querySelector('.zitat');
   const strText = text.textContent;
@@ -84,7 +86,6 @@ function runsecAnimation(elem) {
     clearInterval(timer);
     timer = null;
     back.classList.remove('black');
-    // setTimeout(runAnimation, 5000);
   }
 
   function onTick(){
