@@ -22,8 +22,8 @@ h1{
   background-color: #f1f1f1;
 }
 
-.banner{
-
+.zitat{
+visibility: hidden;
 }
 .black{
     background-color: #000;

@@ -1,3 +1,6 @@
+<script src="https://unpkg.com/intersection-observer"></script>
+<script src="https://unpkg.com/scrollama"></script>
+<script>
 
 const scroller = scrollama();
 let animationsRun = {};
@@ -30,7 +33,7 @@ scroller
 window.addEventListener("resize", scroller.resize);
 
 function runAnimationBlink(elem, index) {
-  
+
   const back = elem;
   const text = elem.querySelector('.fancy');
   const strText = text.textContent;
@@ -80,7 +83,7 @@ function runAnimationTypewriter(elem, index) {
   }
 
   let char = 0;
-  let timer = setInterval(onTick, 50);
+  let timer = setInterval(onTick, 25);
 
   function complete() {
     clearInterval(timer);
@@ -100,3 +103,5 @@ function runAnimationTypewriter(elem, index) {
   }
 
 }
+
+</script>

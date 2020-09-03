@@ -1,0 +1,50 @@
+& when not (@fullScreen) {
+  padding-top: (@paddingTop * 15px);
+  padding-bottom: (@paddingBottom * 15px);
+}
+& when (@bg-type = 'image') {
+  background-image: url(@bg-value);
+}
+P {
+  color: #767676;
+}
+.display-2 {
+  font-size: 3rem;
+  font-weight: 300;
+}
+h1 {
+  font-size: 6vw !important;
+  font-weight: bold !important;
+  text-align: center;
+  line-height: 0.9em;
+  color: white;
+}
+.animation_center {
+  padding: 5vh 0px;
+}
+.banner {
+  width: 100%;
+  height: auto;
+}
+.black {
+  background-color: #fff !important;
+}
+.AniContainer {
+  padding: 5em 0em;
+}
+span {
+  visibility: hidden;
+  transition: opacity 0.5s;
+}
+span.blick {
+  visibility: visible;
+}
+@media (max-width: 768px) {
+  .display-2 {
+    font-size: 1.5rem;
+    line-height: 1.8rem;
+  }
+}
+.mbr-text, .mbr-section-btn {
+  color: #ffffff;
+}
