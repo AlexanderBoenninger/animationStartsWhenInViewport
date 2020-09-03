@@ -1,6 +1,5 @@
-<script src="https://unpkg.com/intersection-observer"></script>
-<script src="https://unpkg.com/scrollama"></script>
-<script>
+
+
 
 const scroller = scrollama();
 let animationsRun = {};
@@ -103,5 +102,3 @@ function runAnimationTypewriter(elem, index) {
   }
 
 }
-
-</script>
