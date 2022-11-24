@@ -1,5 +1,6 @@
-
-
+<script src="https://unpkg.com/intersection-observer"></script>
+<script src="https://unpkg.com/scrollama"></script>
+<script>
 
 const scroller = scrollama();
 let animationsRun = {};
@@ -12,20 +13,14 @@ scroller
 .onStepEnter(response => {
   // { element, index, direction }
   // console.log('onStepEnter', animationsRun);
-  if($(response.element).hasClass('banner_blink') && !animationsRun[response.index]){
-    // animationsRun[response.index] = true;
+ if($(response.element).hasClass('banner_blink') && !animationsRun[response.index]){
     runAnimationBlink(response.element, response.index);
   }
   if($(response.element).hasClass('banner_typewriter') && !animationsRun[response.index]){
     runAnimationTypewriter(response.element, response.index);
   }
 })
-.onStepExit(response => {
-  // { element, index, direction }
-  // console.log('onStepExit', response);
-  // if($(response.element).hasClass('banner_blink')){
-  //   animationsRun[response.index] = false;}
-});
+
 
 // setup resize event
 window.addEventListener("resize", scroller.resize);
@@ -101,3 +96,5 @@ function runAnimationTypewriter(elem, index) {
   }
 
 }
+
+</script>

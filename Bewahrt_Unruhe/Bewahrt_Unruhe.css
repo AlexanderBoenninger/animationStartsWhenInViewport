@@ -34,7 +34,6 @@ h1 {
 }
 span {
   visibility: hidden;
-  transition: opacity 0.5s;
 }
 span.blick {
   visibility: visible;

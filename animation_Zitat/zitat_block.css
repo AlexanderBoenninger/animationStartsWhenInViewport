@@ -14,12 +14,18 @@ H2 {
   color: #000000;
 }
 span {
-  visibility: hidden;
-  transition: opacity 0.5s;
-}
-.zitat {
-  visibility: hidden;
-}
-span.blick {
+    visibility: hidden;
+  }
+.zitat span {
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transition: opacity .2s ease-in;
+   -moz-transition: opacity .2s ease-in;
+   -o-transition: opacity .2s ease-in;
+   transition: opacity 0.2s ease-in;
+  }
+
+span.blick{
   visibility: visible;
+  opacity: 1;
 }
